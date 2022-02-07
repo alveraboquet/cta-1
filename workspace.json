@@ -1,4 +1,13 @@
 {
   "version": 2,
-  "projects": {}
+  "projects": {
+    "api": "apps/api",
+    "api-agents": "libs/api/agents",
+    "api-auth": "libs/api/auth",
+    "api-back-tests": "libs/api/back-tests",
+    "api-engines": "libs/api/engines",
+    "api-exchanges": "libs/api/exchanges",
+    "api-shared-entities": "libs/api/shared/entities",
+    "shared-dtos": "libs/shared/dtos"
+  }
 }
