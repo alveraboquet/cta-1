@@ -1,0 +1,16 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+
+  mat-sidenav-container {
+    min-height: calc(100% - 64px)!important;
+    max-height: calc(100% - 64px)!important;
+    height: calc(100% - 64px)!important;
+
+    mat-sidenav-content {
+      padding: 1.5rem;
+      height: calc(100% - 3rem);
+    }
+  }
+}

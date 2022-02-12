@@ -15,14 +15,17 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@cta/api/env": ["apps/api/src/environments/environment.ts"],
       "@cta/api/agents": ["libs/api/agents/src/index.ts"],
       "@cta/api/auth": ["libs/api/auth/src/index.ts"],
       "@cta/api/back-tests": ["libs/api/back-tests/src/index.ts"],
       "@cta/api/engines": ["libs/api/engines/src/index.ts"],
+      "@cta/api/env": ["apps/api/src/environments/environment.ts"],
       "@cta/api/exchanges": ["libs/api/exchanges/src/index.ts"],
       "@cta/api/shared/entities": ["libs/api/shared/entities/src/index.ts"],
-      "@cta/shared/dtos": ["libs/shared/dtos/src/index.ts"]
+      "@cta/shared/dtos": ["libs/shared/dtos/src/index.ts"],
+      "@cta/web/agents": ["libs/web/agents/src/index.ts"],
+      "@cta/web/auth": ["libs/web/auth/src/index.ts"],
+      "@cta/web/pages": ["libs/web/pages/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

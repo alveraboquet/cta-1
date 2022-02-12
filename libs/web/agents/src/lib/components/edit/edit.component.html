@@ -1,0 +1,147 @@
+<nz-page-header>
+  <nz-page-header-title>
+    <span nz-typography nzEditable [(nzContent)]="agent.name"></span>
+  </nz-page-header-title>
+
+  <nz-page-header-content>
+    <div class="flex flex-col">
+      <form nz-form [formGroup]="configFormGroup">
+        <nz-form-item>
+          <nz-form-label nzFor="exchange">Exchange</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="exchangeType" id="exchange">
+              <nz-option
+                [nzLabel]="option.label | titlecase"
+                [nzValue]="option.value"
+                *ngFor="let option of exchangeTypeOptions"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="type">Type</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="type" id="type">
+              <nz-option
+                [nzLabel]="option.label | titlecase"
+                [nzValue]="option.value"
+                *ngFor="let option of typeOptions"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+
+    <div class="flex flex-col">
+      <h3>Type Configuration</h3>
+      <form nz-form [formGroup]="configFormGroup">
+        <ng-container [ngSwitch]="rawConfigFormGroup">
+          <ng-container *ngSwitchCase="configGridFormGroup">
+            <ng-container *ngTemplateOutlet="gridFormTpl"></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="configEndpointFormGroup">
+            <ng-container *ngTemplateOutlet="endpointFormTpl"></ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="configScriptFormGroup">
+            <ng-container *ngTemplateOutlet="scriptFormTpl"></ng-container>
+          </ng-container>
+        </ng-container>
+      </form>
+    </div>
+
+    <div class="flex flex-col">
+      <h3>Mode</h3>
+      <form nz-form [formGroup]="modeFormGroup">
+        <nz-form-item>
+          <nz-form-label nzFor="mode-type">Type</nz-form-label>
+          <nz-form-control>
+            <nz-select formControlName="type" id="mode-type">
+              <nz-option
+                [nzLabel]="option.label | titlecase"
+                [nzValue]="option.value"
+                *ngFor="let option of modeTypeOptions"
+              ></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label nzFor="value">Value</nz-form-label>
+          <nz-form-control>
+            <input nz-input id="value" formControlName="value" />
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+
+
+
+    <div class="flex">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="
+          !modeFormGroup.valid ||
+          !configFormGroup.valid ||
+          !configFormGroup.dirty ||
+          (submitting$ | async)
+        "
+        (click)="handleSubmit()"
+      >
+        <span *ngIf="!(submitting$ | async)">Save</span>
+        <nz-spin nzSimple *ngIf="(submitting$ | async)"></nz-spin>
+      </button>
+    </div>
+  </nz-page-header-content>
+</nz-page-header>
+
+<ng-template #gridFormTpl>
+  <form nz-form nzLayout="horizontal" [formGroup]="rawConfigFormGroup">
+    <nz-form-item>
+      <nz-form-label nzFor="pair">Pair</nz-form-label>
+      <nz-form-control>
+        <input nz-input id="pair" formControlName="pair" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="min-price">Min Price</nz-form-label>
+      <nz-form-control>
+        <input nz-input id="min-price" formControlName="minPrice" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="grid-width">Grid Width</nz-form-label>
+      <nz-form-control>
+        <input nz-input id="grid-width" formControlName="gridWidth" />
+      </nz-form-control>
+    </nz-form-item>
+    <nz-form-item>
+      <nz-form-label nzFor="grid-count">Grid Count</nz-form-label>
+      <nz-form-control>
+        <input nz-input id="grid-count" formControlName="gridCount" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+
+<ng-template #endpointFormTpl>
+  <form nz-form nzLayout="horizontal" [formGroup]="rawConfigFormGroup">
+    <nz-form-item>
+      <nz-form-label nzFor="endpoint">Endpoint</nz-form-label>
+      <nz-form-control>
+        <input nz-input id="endpoint" formControlName="endpoint" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>
+
+<ng-template #scriptFormTpl>
+  <form nz-form nzLayout="horizontal" [formGroup]="rawConfigFormGroup">
+    <nz-form-item>
+      <nz-form-label nzFor="script">Script</nz-form-label>
+      <nz-form-control>
+        <input nz-input id="script" formControlName="script" />
+      </nz-form-control>
+    </nz-form-item>
+  </form>
+</ng-template>

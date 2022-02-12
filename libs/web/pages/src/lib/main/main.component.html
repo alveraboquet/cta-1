@@ -1,0 +1,28 @@
+<nz-layout>
+  <nz-header class="flex justify-between">
+    <h3 class="text-gray-50 mb-0">Crypto Trade Agents</h3>
+    <ul nz-menu nzTheme="dark" nzMode="horizontal">
+      <li nz-menu-item>
+        <a [routerLink]="['auth', 'logout']">Logout</a>
+      </li>
+    </ul>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzWidth="10rem" nzTheme="light" nzCollapsible>
+      <ul nz-menu nzMode="inline">
+        <li nz-menu-item nzMatchRouter *ngFor="let page of pages">
+          <a [routerLink]="[page.route.path]">
+            <i nz-icon [nzType]="page.icon"></i>
+            <span *ngIf="!isMenuCollapsed">{{ page.name }}</span>
+          </a>
+        </li>
+      </ul>
+    </nz-sider>
+    <nz-layout class="overflow-y-auto">
+      <nz-breadcrumb class="px-5 py-4" nzAutoGenerate></nz-breadcrumb>
+      <nz-content>
+        <router-outlet></router-outlet>
+      </nz-content>
+    </nz-layout>
+  </nz-layout>
+</nz-layout>

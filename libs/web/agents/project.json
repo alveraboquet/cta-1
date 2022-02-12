@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/web/agents",
+  "sourceRoot": "libs/web/agents/src",
+  "prefix": "cta",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/agents"],
+      "options": {
+        "jestConfig": "libs/web/agents/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/agents/src/**/*.ts",
+          "libs/web/agents/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

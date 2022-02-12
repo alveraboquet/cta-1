@@ -19,14 +19,14 @@ export class AgentConfigurationEntity extends CtaEntity<Partial<AgentConfigurati
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column('simple-json')
-  mode: AgentMode;
-
   @Column({
     type: "enum",
     enum: ExchangeType
   })
   exchangeType: ExchangeType;
+
+  @Column('simple-json')
+  mode: AgentMode;
 
   @Column({
     type: "enum",

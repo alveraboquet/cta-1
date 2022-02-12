@@ -1,9 +1,10 @@
 import { AgentDto } from './agent.dto';
+import { ExchangeType } from "./exchange.dto";
 
 export enum AgentModeType {
-  CRON = 'cron',
   INTERVAL = 'interval',
-  TIMEOUT = 'timeout'
+  TIMEOUT = 'timeout',
+  CRON = 'cron'
 }
 
 export enum AgentType {
@@ -36,6 +37,7 @@ export type AgentConfig = AgentGridConfig | AgentEndpointConfig | AgentScriptCon
 
 export interface AgentConfigurationDto {
   id: string;
+  exchangeType: ExchangeType;
   mode: AgentMode;
   type: AgentType;
   config: AgentConfig;
