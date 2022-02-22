@@ -4,7 +4,7 @@ import { AgentConfigurationDto } from './agent-configuration.dto';
 export interface AgentDto {
   id: string;
   name: string;
-  configurations: AgentConfigurationDto[];
+  configuration: AgentConfigurationDto;
   executions: AgentExecutionDto[];
   createdAt: Date;
   updatedAt: Date;

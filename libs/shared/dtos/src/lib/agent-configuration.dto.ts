@@ -43,5 +43,5 @@ export interface AgentConfigurationDto {
   config: AgentConfig;
   version: number;
   createdAt: Date;
-  agent: AgentDto;
+  agent: Partial<AgentDto>;
 }

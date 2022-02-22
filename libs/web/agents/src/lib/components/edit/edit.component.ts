@@ -2,7 +2,7 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import {AgentConfigurationDto, AgentDto, AgentModeType, AgentType, ExchangeType} from '@cta/shared/dtos';
+import { AgentConfigurationDto, AgentDto, AgentModeType, AgentType, ExchangeType } from '@cta/shared/dtos';
 import { AgentsService } from '../../agents.service';
 import { AgentConfigurationsService } from "../../agent-configurations.service";
 
@@ -29,7 +29,7 @@ export class EditComponent implements OnInit, OnDestroy {
   agent = {
     name: 'Untitled Agent',
   } as Partial<AgentDto>;
-  agentConfiguration = {} as Partial<AgentConfigurationDto>;
+  //agentConfiguration = {} as Partial<AgentConfigurationDto>;
   agentTypes = AgentType;
   modeFormGroup = new FormGroup({
     type: new FormControl(AgentModeType.INTERVAL, Validators.required),
@@ -83,19 +83,21 @@ export class EditComponent implements OnInit, OnDestroy {
 
   async updateData(): Promise<void> {
     if (this.agent.id) {
-      this.agentConfiguration = await this.agentConfigurationsService.get(this.agent.id);
-      this.configFormGroup.setValue({
-        exchangeType: this.agentConfiguration.exchangeType,
-        mode: this.agentConfiguration.mode,
-        type: this.agentConfiguration.type,
-        config: this.agentConfiguration.config,
-      });
+      this.agent = await this.agentsService.findOne(this.agent.id);
+      if (this.agent.configuration) {
+        this.configFormGroup.setValue({
+          exchangeType: this.agent.configuration.exchangeType,
+          mode: this.agent.configuration.mode,
+          type: this.agent.configuration.type,
+          config: this.agent.configuration.config,
+        });
+      }
     }
   }
 
   handleConfigFormChange() {
-    this.agentConfiguration = {
-      ...this.agentConfiguration,
+    this.agent.configuration = {
+      ...this.agent.configuration,
       ...this.configFormGroup.getRawValue()
     }
   }
@@ -122,13 +124,9 @@ export class EditComponent implements OnInit, OnDestroy {
     this.submitting$.next(true);
     try {
       this.agent = await this.agentsService.update(this.agent);
-      if (this.agent.id) {
-        this.agentConfiguration = await this.agentConfigurationsService.update(this.agent.id, this.agentConfiguration);
-      }
       await this.router.navigate(['']);
     } finally {
       console.log('Saved agent: ', this.agent);
-      console.log('Saved configuration: ', this.agentConfiguration);
       this.submitting$.next(false);
     }
   }

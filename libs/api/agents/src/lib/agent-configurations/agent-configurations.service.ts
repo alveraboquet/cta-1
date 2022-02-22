@@ -14,6 +14,8 @@ export class AgentConfigurationsService {
     agentConfiguration: AgentConfigurationEntity
   ): Promise<AgentConfigurationEntity> {
     const latest = await this.findLatest(agentConfiguration.agent.id);
+    agentConfiguration.id = undefined;
+    agentConfiguration.createdAt = undefined;
     agentConfiguration.version = latest ? latest.version + 1 : 1;
     return await this.agentConfigurationsRepository.save(agentConfiguration);
   }

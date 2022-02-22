@@ -18,6 +18,12 @@ export class AgentsService {
     );
   }
 
+  findOne(id: string): Promise<AgentDto> {
+    return firstValueFrom(
+      this.http.get<AgentDto>(`${this.apiPath}/${id}`)
+    );
+  }
+
   update(agent: Partial<AgentDto>): Promise<AgentDto> {
     return firstValueFrom(
       this.http.post<AgentDto>(this.apiPath, agent)
