@@ -1,6 +1,11 @@
 <nz-page-header>
   <nz-page-header-title>
-    <span nz-typography nzEditable [(nzContent)]="agent.name"></span>
+    <span
+      nz-typography
+      nzEditable
+      [nzDisabled]="loading$ | async"
+      [(nzContent)]="agent.name"
+    ></span>
   </nz-page-header-title>
 
   <nz-page-header-content>
@@ -9,7 +14,11 @@
         <nz-form-item>
           <nz-form-label nzFor="exchange">Exchange</nz-form-label>
           <nz-form-control>
-            <nz-select formControlName="exchangeType" id="exchange">
+            <nz-select
+              [nzDisabled]="loading$ | async"
+              formControlName="exchangeType"
+              id="exchange"
+            >
               <nz-option
                 [nzLabel]="option.label | titlecase"
                 [nzValue]="option.value"
@@ -21,7 +30,11 @@
         <nz-form-item>
           <nz-form-label nzFor="type">Type</nz-form-label>
           <nz-form-control>
-            <nz-select formControlName="type" id="type">
+            <nz-select
+              [nzDisabled]="loading$ | async"
+              formControlName="type"
+              id="type"
+            >
               <nz-option
                 [nzLabel]="option.label | titlecase"
                 [nzValue]="option.value"
@@ -56,7 +69,11 @@
         <nz-form-item>
           <nz-form-label nzFor="mode-type">Type</nz-form-label>
           <nz-form-control>
-            <nz-select formControlName="type" id="mode-type">
+            <nz-select
+              [nzDisabled]="loading$ | async"
+              formControlName="type"
+              id="mode-type"
+            >
               <nz-option
                 [nzLabel]="option.label | titlecase"
                 [nzValue]="option.value"
@@ -68,13 +85,16 @@
         <nz-form-item>
           <nz-form-label nzFor="value">Value</nz-form-label>
           <nz-form-control>
-            <input nz-input id="value" formControlName="value" />
+            <input
+              nz-input
+              id="value"
+              formControlName="value"
+              [disabled]="!!(loading$ | async)"
+            />
           </nz-form-control>
         </nz-form-item>
       </form>
     </div>
-
-
 
     <div class="flex">
       <button
@@ -89,7 +109,7 @@
         (click)="handleSubmit()"
       >
         <span *ngIf="!(submitting$ | async)">Save</span>
-        <nz-spin nzSimple *ngIf="(submitting$ | async)"></nz-spin>
+        <nz-spin nzSimple *ngIf="submitting$ | async"></nz-spin>
       </button>
     </div>
   </nz-page-header-content>
@@ -100,25 +120,45 @@
     <nz-form-item>
       <nz-form-label nzFor="pair">Pair</nz-form-label>
       <nz-form-control>
-        <input nz-input id="pair" formControlName="pair" />
+        <input
+          nz-input
+          id="pair"
+          formControlName="pair"
+          [disabled]="!!(loading$ | async)"
+        />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="min-price">Min Price</nz-form-label>
       <nz-form-control>
-        <input nz-input id="min-price" formControlName="minPrice" />
+        <input
+          nz-input
+          id="min-price"
+          formControlName="minPrice"
+          [disabled]="!!(loading$ | async)"
+        />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="grid-width">Grid Width</nz-form-label>
       <nz-form-control>
-        <input nz-input id="grid-width" formControlName="gridWidth" />
+        <input
+          nz-input
+          id="grid-width"
+          formControlName="gridWidth"
+          [disabled]="!!(loading$ | async)"
+        />
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
       <nz-form-label nzFor="grid-count">Grid Count</nz-form-label>
       <nz-form-control>
-        <input nz-input id="grid-count" formControlName="gridCount" />
+        <input
+          nz-input
+          id="grid-count"
+          formControlName="gridCount"
+          [disabled]="!!(loading$ | async)"
+        />
       </nz-form-control>
     </nz-form-item>
   </form>
@@ -129,7 +169,12 @@
     <nz-form-item>
       <nz-form-label nzFor="endpoint">Endpoint</nz-form-label>
       <nz-form-control>
-        <input nz-input id="endpoint" formControlName="endpoint" />
+        <input
+          nz-input
+          id="endpoint"
+          formControlName="endpoint"
+          [disabled]="!!(loading$ | async)"
+        />
       </nz-form-control>
     </nz-form-item>
   </form>
@@ -140,7 +185,12 @@
     <nz-form-item>
       <nz-form-label nzFor="script">Script</nz-form-label>
       <nz-form-control>
-        <input nz-input id="script" formControlName="script" />
+        <input
+          nz-input
+          id="script"
+          formControlName="script"
+          [disabled]="!!(loading$ | async)"
+        />
       </nz-form-control>
     </nz-form-item>
   </form>

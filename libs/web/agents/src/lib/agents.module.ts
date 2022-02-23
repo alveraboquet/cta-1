@@ -14,7 +14,8 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import {NzSpinModule} from "ng-zorro-antd/spin";
+import { NzSpinModule } from "ng-zorro-antd/spin";
+import { NzMessageModule } from "ng-zorro-antd/message";
 
 @NgModule({
   imports: [
@@ -30,6 +31,7 @@ import {NzSpinModule} from "ng-zorro-antd/spin";
     NzSelectModule,
     NzTypographyModule,
     NzSpinModule,
+    NzMessageModule,
   ],
   declarations: [ListComponent, EditComponent],
   providers: [AgentsService, AgentConfigurationsService],
