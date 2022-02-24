@@ -2,18 +2,22 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { Component, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
-import { AgentDto, AgentModeType, AgentType, ExchangeType } from '@cta/shared/dtos';
+import {
+  AgentDto,
+  AgentModeType,
+  AgentType,
+  ExchangeType,
+} from '@cta/shared/dtos';
 import { AgentsService } from '../../agents.service';
-import { NzMessageService } from "ng-zorro-antd/message";
+import { NzMessageService } from 'ng-zorro-antd/message';
 
 @Component({
   selector: 'cta-web-agents-list',
-  templateUrl: './edit.component.html',
-  styleUrls: ['./edit.component.scss'],
+  templateUrl: './detail.component.html',
+  styleUrls: ['./detail.component.scss'],
   encapsulation: ViewEncapsulation.Emulated,
 })
-export class EditComponent implements OnInit, OnDestroy {
-  loading$ = new BehaviorSubject<boolean>(false);
+export class DetailComponent implements OnInit, OnDestroy {
   submitting$ = new BehaviorSubject<boolean>(false);
   exchangeTypeOptions = Object.values(ExchangeType).map((value) => ({
     value,
@@ -84,12 +88,14 @@ export class EditComponent implements OnInit, OnDestroy {
   async updateData(): Promise<void> {
     if (this.agent.id) {
       try {
-        this.loading$.next(true);
+        this.configFormGroup.disable({ emitEvent: false });
         this.agent = await this.agentsService.findOne(this.agent.id);
       } catch (e) {
-        this.messageService.error('An error occurred while loading agent data... Please try again at a later time.');
+        this.messageService.error(
+          'An error occurred while loading agent data... Please try again at a later time.'
+        );
       } finally {
-        this.loading$.next(false);
+        this.configFormGroup.enable({ emitEvent: false });
       }
 
       if (this.agent.configuration) {
@@ -106,8 +112,8 @@ export class EditComponent implements OnInit, OnDestroy {
   handleConfigFormChange() {
     this.agent.configuration = {
       ...this.agent.configuration,
-      ...this.configFormGroup.getRawValue()
-    }
+      ...this.configFormGroup.getRawValue(),
+    };
   }
 
   handleTypeChange() {
@@ -135,7 +141,9 @@ export class EditComponent implements OnInit, OnDestroy {
       this.messageService.success('Agent created successfully!');
       await this.router.navigate(['']);
     } catch (e) {
-      this.messageService.error('An error occurred while saving the agent... Please try again at a later time.');
+      this.messageService.error(
+        'An error occurred while saving the agent... Please try again at a later time.'
+      );
     } finally {
       this.submitting$.next(false);
     }

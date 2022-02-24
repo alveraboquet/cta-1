@@ -5,7 +5,7 @@ import { AgentsRoutingModule } from './agents.routing.module';
 import { AgentsService } from './agents.service';
 import { AgentConfigurationsService } from './agent-configurations.service';
 import { ListComponent } from './components/list/list.component';
-import { EditComponent } from './components/edit/edit.component';
+import { DetailComponent } from './components/detail/detail.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -33,7 +33,7 @@ import { NzMessageModule } from "ng-zorro-antd/message";
     NzSpinModule,
     NzMessageModule,
   ],
-  declarations: [ListComponent, EditComponent],
+  declarations: [ListComponent, DetailComponent],
   providers: [AgentsService, AgentConfigurationsService],
 })
 export class AgentsModule {}

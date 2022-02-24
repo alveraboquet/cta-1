@@ -12,14 +12,14 @@ const routes: Routes = [
     path: 'detail',
     component: DetailComponent,
     data: {
-      breadcrumb: 'Detail'
+      breadcrumb: 'Edit'
     }
   },
   {
     path: 'detail/:id',
     component: DetailComponent,
     data: {
-      breadcrumb: 'Detail'
+      breadcrumb: 'Edit'
     }
   },
 ];
@@ -28,4 +28,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule]
 })
-export class AgentsRoutingModule { }
+export class ExchangesRoutingModule { }

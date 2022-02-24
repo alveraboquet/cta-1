@@ -10,7 +10,12 @@ import {
 import { AuthGuard } from '@nestjs/passport';
 import { auth } from 'firebase-admin';
 import { User } from '@cta/api/auth';
-import { ExchangeDto } from '@cta/shared/dtos';
+import {
+  AgentConfigurationDto,
+  AgentDto,
+  ExchangeDto,
+  ExchangeType,
+} from '@cta/shared/dtos';
 // noinspection ES6PreferShortImport
 import { ExchangesService } from './exchanges.service';
 import { ExchangeEntity } from './exchange.entity';
@@ -22,7 +27,10 @@ export class ExchangesController {
 
   @UseGuards(AuthGuard('firebase-jwt'))
   @Post()
-  create(@User() user: auth.DecodedIdToken, @Body() exchangeDto: ExchangeDto) {
+  async create(
+    @User() user: auth.DecodedIdToken,
+    @Body() exchangeDto: Partial<ExchangeDto>
+  ): Promise<ExchangeDto> {
     let result;
     const exchange = new ExchangeEntity(exchangeDto);
 
@@ -30,7 +38,7 @@ export class ExchangesController {
       exchange.userId = user.uid;
     }
     if (exchange.userId === user.uid) {
-      result = this.exchangesService.save(exchange);
+      result = await this.exchangesService.save(exchange);
     }
 
     return result;
@@ -38,11 +46,43 @@ export class ExchangesController {
 
   @UseGuards(AuthGuard('firebase-jwt'))
   @Get()
-  find(
+  async find(
     @User() user: auth.DecodedIdToken,
     @Paginate() query: PaginateQuery
-  ): Promise<Paginated<ExchangeEntity>> {
-    return this.exchangesService.find(query, user.uid);
+  ): Promise<Paginated<ExchangeDto>> {
+    return (await this.exchangesService.find(
+      query,
+      user.uid
+    )) as Paginated<unknown> as Paginated<ExchangeDto>;
+  }
+
+  @UseGuards(AuthGuard('firebase-jwt'))
+  @Get(':id')
+  async findOne(
+    @User() user: auth.DecodedIdToken,
+    @Param('idOrType') idOrType: string | ExchangeType
+  ): Promise<ExchangeDto> {
+    let result: ExchangeDto;
+
+    if (
+      Object.values(ExchangeType).some(
+        (exchangeType) => exchangeType === idOrType
+      )
+    ) {
+      result = (await this.exchangesService.findOne(
+        user.id,
+        idOrType as ExchangeType
+      )) as unknown as ExchangeDto;
+    } else {
+      const exchange = await this.exchangesService.findOneById(
+        idOrType as string
+      );
+      if (exchange.userId === user.uid) {
+        result = exchange;
+      }
+    }
+
+    return result;
   }
 
   @UseGuards(AuthGuard('firebase-jwt'))

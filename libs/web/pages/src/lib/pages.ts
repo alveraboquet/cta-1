@@ -9,5 +9,16 @@ export const pages = [
         breadcrumb: 'Agents'
       }
     }
+  },
+  {
+    name: 'Exchanges',
+    icon: 'user',
+    route: {
+      path: 'exchanges',
+      loadChildren: () => import('@cta/web/exchanges').then(mod => mod.WebExchangesModule),
+      data: {
+        breadcrumb: 'Exchanges'
+      }
+    }
   }
 ]

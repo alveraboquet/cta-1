@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/web/exchanges",
+  "sourceRoot": "libs/web/exchanges/src",
+  "prefix": "cta",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/exchanges"],
+      "options": {
+        "jestConfig": "libs/web/exchanges/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/exchanges/src/**/*.ts",
+          "libs/web/exchanges/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

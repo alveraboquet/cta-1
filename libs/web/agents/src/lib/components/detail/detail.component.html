@@ -3,7 +3,7 @@
     <span
       nz-typography
       nzEditable
-      [nzDisabled]="loading$ | async"
+      [nzDisabled]="configFormGroup.disabled"
       [(nzContent)]="agent.name"
     ></span>
   </nz-page-header-title>
@@ -15,7 +15,6 @@
           <nz-form-label nzFor="exchange">Exchange</nz-form-label>
           <nz-form-control>
             <nz-select
-              [nzDisabled]="loading$ | async"
               formControlName="exchangeType"
               id="exchange"
             >
@@ -31,7 +30,6 @@
           <nz-form-label nzFor="type">Type</nz-form-label>
           <nz-form-control>
             <nz-select
-              [nzDisabled]="loading$ | async"
               formControlName="type"
               id="type"
             >
@@ -70,7 +68,6 @@
           <nz-form-label nzFor="mode-type">Type</nz-form-label>
           <nz-form-control>
             <nz-select
-              [nzDisabled]="loading$ | async"
               formControlName="type"
               id="mode-type"
             >
@@ -89,7 +86,6 @@
               nz-input
               id="value"
               formControlName="value"
-              [disabled]="!!(loading$ | async)"
             />
           </nz-form-control>
         </nz-form-item>
@@ -124,7 +120,6 @@
           nz-input
           id="pair"
           formControlName="pair"
-          [disabled]="!!(loading$ | async)"
         />
       </nz-form-control>
     </nz-form-item>
@@ -135,7 +130,6 @@
           nz-input
           id="min-price"
           formControlName="minPrice"
-          [disabled]="!!(loading$ | async)"
         />
       </nz-form-control>
     </nz-form-item>
@@ -146,7 +140,6 @@
           nz-input
           id="grid-width"
           formControlName="gridWidth"
-          [disabled]="!!(loading$ | async)"
         />
       </nz-form-control>
     </nz-form-item>
@@ -157,7 +150,6 @@
           nz-input
           id="grid-count"
           formControlName="gridCount"
-          [disabled]="!!(loading$ | async)"
         />
       </nz-form-control>
     </nz-form-item>
@@ -173,7 +165,6 @@
           nz-input
           id="endpoint"
           formControlName="endpoint"
-          [disabled]="!!(loading$ | async)"
         />
       </nz-form-control>
     </nz-form-item>
@@ -189,7 +180,6 @@
           nz-input
           id="script"
           formControlName="script"
-          [disabled]="!!(loading$ | async)"
         />
       </nz-form-control>
     </nz-form-item>

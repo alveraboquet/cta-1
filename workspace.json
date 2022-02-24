@@ -13,6 +13,7 @@
     "web-agents": "libs/web/agents",
     "web-auth": "libs/web/auth",
     "web-e2e": "apps/web-e2e",
+    "web-exchanges": "libs/web/exchanges",
     "web-pages": "libs/web/pages"
   }
 }

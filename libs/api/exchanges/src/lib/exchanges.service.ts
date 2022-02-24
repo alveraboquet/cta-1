@@ -42,13 +42,16 @@ export class ExchangesService {
     });
   }
 
-
   findOne(userId: string, type: ExchangeType): Promise<ExchangeEntity | undefined> {
     const where = {
       userId,
       type,
     } as ObjectLiteral;
     return this.exchangesRepository.findOne({ where });
+  }
+
+  findOneById(id: string): Promise<ExchangeEntity | undefined> {
+    return this.exchangesRepository.findOne(id);
   }
 
   delete(id: string, userId?: string): Promise<ExchangeEntity> {
