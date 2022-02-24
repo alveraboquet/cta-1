@@ -1,0 +1,41 @@
+<nz-page-header>
+  <nz-page-header-title>Back Tests List</nz-page-header-title>
+
+  <nz-page-header-extra>
+    <a nz-button nzType="primary" [routerLink]="['detail']">New</a>
+  </nz-page-header-extra>
+
+  <nz-page-header-content>
+    <nz-table
+      #backTestsTable
+      [nzFrontPagination]="false"
+      [nzTotal]="total"
+      [nzPageIndex]="page"
+      [nzPageSize]="limit"
+      [nzLoading]="loading$ | async"
+      (nzQueryParams)="handleQueryParamsChange($event)"
+      [nzData]="(backTests$ | async) || []"
+    >
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Name</th>
+        <th>Created</th>
+        <th>Actions</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let data of backTestsTable.data">
+        <td><a [routerLink]="['detail', data?.id]">{{ data?.id }}</a></td>
+        <td>{{ data?.name }}</td>
+        <td>{{ data?.createdAt | date:'short' }}</td>
+        <td>
+          <a>Start</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </nz-page-header-content>
+</nz-page-header>
+
+

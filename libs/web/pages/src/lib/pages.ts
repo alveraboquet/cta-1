@@ -11,6 +11,17 @@ export const pages = [
     }
   },
   {
+    name: 'Back Tests',
+    icon: 'user',
+    route: {
+      path: 'back-tests',
+      loadChildren: () => import('@cta/web/back-tests').then(mod => mod.WebBackTestsModule),
+      data: {
+        breadcrumb: 'Back Tests'
+      }
+    }
+  },
+  {
     name: 'Exchanges',
     icon: 'user',
     route: {

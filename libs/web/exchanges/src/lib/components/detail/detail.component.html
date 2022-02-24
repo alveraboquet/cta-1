@@ -13,14 +13,10 @@
           <nz-form-label nzFor="type">Type</nz-form-label>
           <nz-form-control>
             <nz-select
+              [nzOptions]="exchangeTypeOptions"
               formControlName="type"
               id="type"
             >
-              <nz-option
-                [nzLabel]="option.label | titlecase"
-                [nzValue]="option.value"
-                *ngFor="let option of exchangeTypeOptions"
-              ></nz-option>
             </nz-select>
           </nz-form-control>
         </nz-form-item>

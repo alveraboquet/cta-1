@@ -25,6 +25,7 @@
       "@cta/shared/dtos": ["libs/shared/dtos/src/index.ts"],
       "@cta/web/agents": ["libs/web/agents/src/index.ts"],
       "@cta/web/auth": ["libs/web/auth/src/index.ts"],
+      "@cta/web/back-tests": ["libs/web/back-tests/src/index.ts"],
       "@cta/web/exchanges": ["libs/web/exchanges/src/index.ts"],
       "@cta/web/pages": ["libs/web/pages/src/index.ts"]
     }

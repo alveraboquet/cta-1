@@ -16,7 +16,7 @@ export class DetailComponent implements OnInit, OnDestroy {
   submitting$ = new BehaviorSubject<boolean>(false);
   exchangeTypeOptions = Object.values(ExchangeType).map((value) => ({
     value,
-    label: value,
+    label: value.charAt(0).toUpperCase() + value.slice(1),
   }));
   exchange = {
     type: ExchangeType.BINANCE,
@@ -110,7 +110,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       this.submitting$.next(true);
       this.exchange = await this.exchangesService.update(this.exchange);
       this.messageService.success('Exchange created successfully!');
-      await this.router.navigate(['']);
+      await this.router.navigate(['exchanges']);
     } catch (e) {
       this.messageService.error(
         'An error occurred while saving the agent... Please try again at a later time.'

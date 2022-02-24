@@ -1,10 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AgentsRoutingModule } from './agents.routing.module';
-import { AgentsService } from './agents.service';
-import { ListComponent } from './components/list/list.component';
-import { DetailComponent } from './components/detail/detail.component';
 import { NzTableModule } from 'ng-zorro-antd/table';
 import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzPageHeaderModule } from 'ng-zorro-antd/page-header';
@@ -13,13 +9,19 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { NzTypographyModule } from 'ng-zorro-antd/typography';
-import { NzSpinModule } from "ng-zorro-antd/spin";
-import { NzMessageModule } from "ng-zorro-antd/message";
+import { NzSpinModule } from 'ng-zorro-antd/spin';
+import { NzMessageModule } from 'ng-zorro-antd/message';
+import { BackTestsRoutingModule } from './back-tests.routing.module';
+import { ListComponent } from './components/list/list.component';
+import { DetailComponent } from './components/detail/detail.component';
+import { BackTestsService } from './back-tests.service';
+import {AgentsModule} from "@cta/web/agents";
 
 @NgModule({
   imports: [
     CommonModule,
-    AgentsRoutingModule,
+    BackTestsRoutingModule,
+    AgentsModule,
     ReactiveFormsModule,
     NzTableModule,
     NzDividerModule,
@@ -33,6 +35,6 @@ import { NzMessageModule } from "ng-zorro-antd/message";
     NzMessageModule,
   ],
   declarations: [ListComponent, DetailComponent],
-  providers: [AgentsService],
+  providers: [BackTestsService],
 })
-export class AgentsModule {}
+export class WebBackTestsModule {}

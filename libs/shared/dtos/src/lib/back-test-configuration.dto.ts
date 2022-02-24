@@ -3,8 +3,8 @@ import { AgentDto } from '@cta/shared/dtos';
 
 export interface BackTestConfigurationDto {
   id: string;
-  agents: AgentDto[]
+  agents: Partial<AgentDto>[]
   version: number;
   createdAt: Date;
-  backTest: BackTestDto;
+  backTest: Partial<BackTestDto>;
 }

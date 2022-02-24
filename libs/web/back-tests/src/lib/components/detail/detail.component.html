@@ -1,0 +1,45 @@
+<nz-page-header>
+  <nz-page-header-title>
+    <span
+      nz-typography
+      nzEditable
+      [nzDisabled]="configFormGroup.disabled"
+      [(nzContent)]="backTest.name"
+    ></span>
+  </nz-page-header-title>
+
+  <nz-page-header-content>
+    <div class="flex flex-col">
+      <form nz-form [formGroup]="configFormGroup">
+        <nz-form-item>
+          <nz-form-label nzFor="agents">Agents</nz-form-label>
+          <nz-form-control>
+            <nz-select
+              nzMode="tags"
+              [nzOptions]="(agentsOptions$ | async) || []"
+              formControlName="agents"
+              id="agents"
+            >
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+
+    <div class="flex">
+      <button
+        nz-button
+        nzType="primary"
+        [disabled]="
+          !configFormGroup.valid ||
+          !configFormGroup.dirty ||
+          (submitting$ | async)
+        "
+        (click)="handleSubmit()"
+      >
+        <span *ngIf="!(submitting$ | async)">Save</span>
+        <nz-spin nzSimple *ngIf="submitting$ | async"></nz-spin>
+      </button>
+    </div>
+  </nz-page-header-content>
+</nz-page-header>

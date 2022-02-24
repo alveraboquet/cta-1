@@ -1,0 +1,26 @@
+{
+  "projectType": "library",
+  "root": "libs/web/back-tests",
+  "sourceRoot": "libs/web/back-tests/src",
+  "prefix": "cta",
+  "targets": {
+    "test": {
+      "executor": "@nrwl/jest:jest",
+      "outputs": ["coverage/libs/web/back-tests"],
+      "options": {
+        "jestConfig": "libs/web/back-tests/jest.config.js",
+        "passWithNoTests": true
+      }
+    },
+    "lint": {
+      "executor": "@nrwl/linter:eslint",
+      "options": {
+        "lintFilePatterns": [
+          "libs/web/back-tests/src/**/*.ts",
+          "libs/web/back-tests/src/**/*.html"
+        ]
+      }
+    }
+  },
+  "tags": []
+}

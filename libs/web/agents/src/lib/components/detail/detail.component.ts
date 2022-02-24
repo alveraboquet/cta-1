@@ -8,8 +8,9 @@ import {
   AgentType,
   ExchangeType,
 } from '@cta/shared/dtos';
-import { AgentsService } from '../../agents.service';
 import { NzMessageService } from 'ng-zorro-antd/message';
+import { NzSelectOptionInterface } from 'ng-zorro-antd/select/select.types';
+import { AgentsService } from '../../agents.service';
 
 @Component({
   selector: 'cta-web-agents-list',
@@ -21,16 +22,16 @@ export class DetailComponent implements OnInit, OnDestroy {
   submitting$ = new BehaviorSubject<boolean>(false);
   exchangeTypeOptions = Object.values(ExchangeType).map((value) => ({
     value,
-    label: value,
-  }));
+    label: value.charAt(0).toUpperCase() + value.slice(1),
+  })) as NzSelectOptionInterface[];
   modeTypeOptions = Object.values(AgentModeType).map((value) => ({
     value,
-    label: value,
-  }));
+    label: value.charAt(0).toUpperCase() + value.slice(1),
+  })) as NzSelectOptionInterface[];
   typeOptions = Object.values(AgentType).map((value) => ({
     value,
-    label: value,
-  }));
+    label: value.charAt(0).toUpperCase() + value.slice(1),
+  })) as NzSelectOptionInterface[];
   agent = {
     name: 'Untitled Agent',
   } as Partial<AgentDto>;
@@ -139,7 +140,7 @@ export class DetailComponent implements OnInit, OnDestroy {
       this.submitting$.next(true);
       this.agent = await this.agentsService.update(this.agent);
       this.messageService.success('Agent created successfully!');
-      await this.router.navigate(['']);
+      await this.router.navigate(['agents']);
     } catch (e) {
       this.messageService.error(
         'An error occurred while saving the agent... Please try again at a later time.'
